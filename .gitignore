@@ -1,8 +1,9 @@
+allure-results/
+allure-report/
+log.html
+report.html
+output.xml
 __pycache__/
 *.pyc
-log.html
-output.xml
-report.html
-results/
-.idea/
 .vscode/
+.idea/
