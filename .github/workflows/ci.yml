@@ -2,16 +2,14 @@ name: Robot Framework CI
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Récupérer le code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Installer Python
@@ -19,53 +17,35 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Installer Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: "temurin"
-          java-version: "17"
-
-      - name: Installer les dépendances Python
+      - name: Installer dépendances
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install robotframework
+          pip install robotframework-seleniumlibrary
+          pip install allure-robotframework
 
-      - name: Installer Allure CLI
+      - name: Générer test automatiquement
         run: |
-          wget https://github.com/allure-framework/allure2/releases/latest/download/allure-2.34.1.tgz
-          tar -zxvf allure-2.34.1.tgz
-          sudo mv allure-2.34.1 /opt/allure
-          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+          python generate_robot_test.py
 
-      - name: Exécuter les tests Robot avec Allure
+      - name: Exécuter tests avec Allure
         run: |
-          robot --listener allure_robotframework;allure-results tests/
+          robot --listener allure_robotframework tests/ generated_tests/
 
-      - name: Générer le rapport Allure
-        if: always()
+      # ✅ Installer Allure CLI (version propre)
+      - name: Install Allure
+        run: |
+          sudo apt-add-repository ppa:qameta/allure -y
+          sudo apt-get update
+          sudo apt-get install allure -y
+
+      # ✅ Générer le rapport
+      - name: Generate Allure Report
         run: |
           allure generate allure-results --clean -o allure-report
 
-      - name: Sauvegarder le rapport Allure
-        if: always()
+      # ✅ Upload rapport
+      - name: Upload Allure Report
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: allure-report
-
-      - name: Sauvegarder les résultats Allure
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results
-
-      - name: Sauvegarder les rapports Robot Framework
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: robot-reports
-          path: |
-            output.xml
-            log.html
-            report.html
