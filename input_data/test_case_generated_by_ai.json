@@ -1,0 +1,24 @@
+{
+  "test_name": "Test Login Valide Généré Par IA",
+  "steps": [
+    {
+      "keyword": "Log To Console",
+      "args": [
+        "Début du test généré par IA"
+      ]
+    },
+    {
+      "keyword": "Should Be Equal",
+      "args": [
+        "1",
+        "1"
+      ]
+    },
+    {
+      "keyword": "Log To Console",
+      "args": [
+        "Fin du test généré par IA"
+      ]
+    }
+  ]
+}

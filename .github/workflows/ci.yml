@@ -32,6 +32,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Générer le JSON depuis le prompt
+        run: |
+          python generate_json_from_prompt.py
+
       - name: Générer automatiquement le test Robot
         run: |
           python generate_robot_test.py
