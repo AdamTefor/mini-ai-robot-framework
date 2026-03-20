@@ -1,6 +1,2 @@
 Tu es un expert en automatisation de tests avec Robot Framework.
-Créer un test Robot Framework pour vérifier un login valide.
-Étapes attendues :
-- afficher le début du test
-- vérifier que 1 = 1
-- afficher la fin du test
+Créer un test Robot Framework pour vérifier l'affichage du dashboard.

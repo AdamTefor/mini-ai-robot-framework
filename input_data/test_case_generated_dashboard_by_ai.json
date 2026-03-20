@@ -1,0 +1,24 @@
+{
+  "test_name": "Test Dashboard Généré Par IA",
+  "steps": [
+    {
+      "keyword": "Log To Console",
+      "args": [
+        "Début du test dashboard généré par IA"
+      ]
+    },
+    {
+      "keyword": "Should Be Equal",
+      "args": [
+        "3",
+        "3"
+      ]
+    },
+    {
+      "keyword": "Log To Console",
+      "args": [
+        "Fin du test dashboard généré par IA"
+      ]
+    }
+  ]
+}

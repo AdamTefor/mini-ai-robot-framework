@@ -1,0 +1,24 @@
+{
+  "test_name": "Test Logout Généré Par IA",
+  "steps": [
+    {
+      "keyword": "Log To Console",
+      "args": [
+        "Début du test logout généré par IA"
+      ]
+    },
+    {
+      "keyword": "Should Be Equal",
+      "args": [
+        "2",
+        "2"
+      ]
+    },
+    {
+      "keyword": "Log To Console",
+      "args": [
+        "Fin du test logout généré par IA"
+      ]
+    }
+  ]
+}
