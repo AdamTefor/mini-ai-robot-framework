@@ -1,0 +1,17 @@
+{
+  "test_name": "Test Logout",
+  "steps": [
+    {
+      "keyword": "Log To Console",
+      "args": ["Début du test logout"]
+    },
+    {
+      "keyword": "Should Be Equal",
+      "args": ["2", "2"]
+    },
+    {
+      "keyword": "Log To Console",
+      "args": ["Test logout terminé avec succès"]
+    }
+  ]
+}

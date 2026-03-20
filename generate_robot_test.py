@@ -1,34 +1,38 @@
 import json
 from pathlib import Path
 
-# Fichier JSON source
-input_file = Path("input_data/test_case_login.json")
-
-# Dossier de sortie
+# Dossiers
+input_dir = Path("input_data")
 output_dir = Path("generated_tests")
+
 output_dir.mkdir(exist_ok=True)
 
-# Fichier Robot généré
-output_file = output_dir / "generated_from_json.robot"
+# Lire tous les fichiers JSON
+json_files = list(input_dir.glob("*.json"))
 
-# Lire le JSON
-with input_file.open("r", encoding="utf-8") as f:
-    data = json.load(f)
+if not json_files:
+    print("Aucun fichier JSON trouvé dans input_data/")
+    exit()
 
-test_name = data["test_name"]
-steps = data["steps"]
+for json_file in json_files:
+    with json_file.open("r", encoding="utf-8") as f:
+        data = json.load(f)
 
-# Construire le contenu Robot
-robot_lines = ["*** Test Cases ***", test_name]
+    test_name = data["test_name"]
+    steps = data["steps"]
 
-for step in steps:
-    keyword = step["keyword"]
-    args = "    ".join(step["args"])
-    robot_lines.append(f"    {keyword}    {args}")
+    robot_lines = ["*** Test Cases ***", test_name]
 
-robot_content = "\n".join(robot_lines)
+    for step in steps:
+        keyword = step["keyword"]
+        args = "    ".join(step["args"])
+        robot_lines.append(f"    {keyword}    {args}")
 
-# Écrire le fichier Robot
-output_file.write_text(robot_content, encoding="utf-8")
+    robot_content = "\n".join(robot_lines)
 
-print(f"Fichier Robot généré : {output_file}")
+    output_file = output_dir / f"{json_file.stem}.robot"
+    output_file.write_text(robot_content, encoding="utf-8")
+
+    print(f"Fichier généré : {output_file}")
+
+print("Génération terminée avec succès.")

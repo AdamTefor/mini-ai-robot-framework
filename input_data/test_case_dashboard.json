@@ -1,0 +1,17 @@
+{
+  "test_name": "Test Dashboard",
+  "steps": [
+    {
+      "keyword": "Log To Console",
+      "args": ["Début du test dashboard"]
+    },
+    {
+      "keyword": "Should Be Equal",
+      "args": ["3", "3"]
+    },
+    {
+      "keyword": "Log To Console",
+      "args": ["Test dashboard terminé avec succès"]
+    }
+  ]
+}
