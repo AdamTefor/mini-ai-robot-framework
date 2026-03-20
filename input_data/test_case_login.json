@@ -1,0 +1,17 @@
+{
+  "test_name": "Test Login Valide",
+  "steps": [
+    {
+      "keyword": "Log To Console",
+      "args": ["Début du test login"]
+    },
+    {
+      "keyword": "Should Be Equal",
+      "args": ["1", "1"]
+    },
+    {
+      "keyword": "Log To Console",
+      "args": ["Test login terminé avec succès"]
+    }
+  ]
+}

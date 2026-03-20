@@ -1,19 +1,34 @@
+import json
 from pathlib import Path
 
-print("Début du script...")
+# Fichier JSON source
+input_file = Path("input_data/test_case_login.json")
 
+# Dossier de sortie
 output_dir = Path("generated_tests")
 output_dir.mkdir(exist_ok=True)
 
-output_file = output_dir / "generated_login_test.robot"
+# Fichier Robot généré
+output_file = output_dir / "generated_from_json.robot"
 
-robot_content = """*** Test Cases ***
-Test Généré Automatiquement
-    Log To Console    Test généré automatiquement depuis Python
-    Should Be Equal    2    2
-"""
+# Lire le JSON
+with input_file.open("r", encoding="utf-8") as f:
+    data = json.load(f)
 
+test_name = data["test_name"]
+steps = data["steps"]
+
+# Construire le contenu Robot
+robot_lines = ["*** Test Cases ***", test_name]
+
+for step in steps:
+    keyword = step["keyword"]
+    args = "    ".join(step["args"])
+    robot_lines.append(f"    {keyword}    {args}")
+
+robot_content = "\n".join(robot_lines)
+
+# Écrire le fichier Robot
 output_file.write_text(robot_content, encoding="utf-8")
 
-print(f"Fichier généré avec succès : {output_file.resolve()}")
-print(f"Le fichier existe ? {output_file.exists()}")
+print(f"Fichier Robot généré : {output_file}")
