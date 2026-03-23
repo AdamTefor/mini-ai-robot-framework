@@ -4,8 +4,12 @@ from pathlib import Path
 # Dossiers
 input_dir = Path("input_data")
 output_dir = Path("generated_tests")
-
 output_dir.mkdir(exist_ok=True)
+
+# Nettoyer les anciens fichiers Robot générés par IA
+for old_file in output_dir.glob("test_case_generated_*.robot"):
+    old_file.unlink()
+    print(f"Ancien fichier Robot supprimé : {old_file}")
 
 # Lire tous les fichiers JSON
 json_files = list(input_dir.glob("*.json"))
@@ -33,6 +37,6 @@ for json_file in json_files:
     output_file = output_dir / f"{json_file.stem}.robot"
     output_file.write_text(robot_content, encoding="utf-8")
 
-    print(f"Fichier généré : {output_file}")
+    print(f"Fichier - généré : {output_file}")
 
 print("Génération terminée avec succès.")

@@ -9,6 +9,11 @@ prompt_text = prompt_file.read_text(encoding="utf-8").lower()
 output_dir = Path("input_data")
 output_dir.mkdir(exist_ok=True)
 
+# Nettoyer les anciens JSON générés par IA
+for old_file in output_dir.glob("test_case_generated_*.json"):
+    old_file.unlink()
+    print(f"Ancien JSON supprimé : {old_file}")
+
 # Détection simple de l'intention
 if "login" in prompt_text:
     generated_json = {
@@ -95,6 +100,6 @@ output_file = output_dir / output_filename
 with output_file.open("w", encoding="utf-8") as f:
     json.dump(generated_json, f, indent=2, ensure_ascii=False)
 
-print("Prompt lu avec succès :")
+print("Prompt - lu avec succès :")
 print(prompt_text)
 print(f"JSON généré : {output_file}")

@@ -1,2 +1,2 @@
 Tu es un expert en automatisation de tests avec Robot Framework.
-Créer un test Robot Framework pour vérifier l'affichage du dashboard.
+Créer un test Robot Framework pour vérifier un login valide.
